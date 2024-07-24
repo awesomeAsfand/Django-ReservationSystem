@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'rsystem/base.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    {{car_detail.car_make}}
+    {% endblock %}
+</head>
+{% block content %}
+<body>
+<div class="card mx-auto text-center" style="width: 50rem;">
+  <div class="card-header">
+    {{car_detail.car_make}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Car Model : {{car_detail.car_model}}</h5>
+      <img src="{%if car_detail.car_image %} {{car_detail.car_image.url}}{%else%}{% static 'media/media/na.jpeg'%} {% endif %}" alt="Card image cap" class="img-fluid">
+      <p class="card-text">{{car_detail.car_description | linebreaks }}</p>
+      <p class="card-text">Car Rent : {{car_detail.car_rent}}</p>
+      <a href="{%url 'reservation' car_detail.id %}" class="btn btn-primary">Reservation</a>
+  </div>
+  <div class="card-footer text-muted">
+      Last updated : {{car_detail.updated}}
+  </div>
+</div>
+</body>
+</html>
+{% endblock %}
+
+

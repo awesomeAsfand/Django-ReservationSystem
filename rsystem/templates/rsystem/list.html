@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% extends 'rsystem/base.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% block content %}
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="card card-body">
+                <form method="get">
+                    {{myFilters.form}}
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Car Make</th>
+            <th>Car Rent</th>
+            <th>Details</th>
+            <th>Check Availability</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in cars %}
+            <tr>
+                <td class="image-cell"> <img class="img-fluid" src="{% if c.car_image %} {{c.car_image.url}} {%else%} {%static 'media/media/na.jpeg'%}{%endif%}" alt="Card image cap"></td>
+                <td>{{c.make}}</td>
+                <td>{{c.car_rent}}</td>
+                <td><a class="btn btn-primary" href="{%url 'car_detail' c.slug%}">Details</a></td>
+                <td><a class="btn btn-primary" href="{%url 'check_availability' c.id %}">Check Availability</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+<style>
+    td.image-cell{
+        width: 150px;
+        height: auto;
+    }
+    .image-cell{
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+</style>
+{% endblock %}

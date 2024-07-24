@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'rsystem/base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{%block content %}
+<body>
+<h2>Reserve : {{car.make}}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Reserve">
+</form>
+</body>
+</html>
+{% endblock %}
+
