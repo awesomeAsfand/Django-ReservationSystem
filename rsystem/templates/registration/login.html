@@ -21,7 +21,7 @@
                     style="width: 185px;" alt="logo">
                   <h4 class="mt-1 mb-5 pb-1">Rent A Car</h4>
                 </div>
-                <form action="{%url 'login'%}" method="post">
+                <form action="{% url 'rsystem:login' %}" method="post">
                   <p>Login to your account</p>
                     {% if form.errors %}
                     <p> Password Error! Try Again</p>
@@ -32,31 +32,8 @@
                     {{form.as_p}}
                   <p><input type="submit" value="login"></p>
                 </form>
-
-
-
-<!--                <form method="post" action="{%url 'login' %}">-->
-<!--                  <p>Please login to your account</p>-->
-<!--                  {% csrf_token %}-->
-<!--                  <label class="form-label" >Username</label>-->
-<!--                  <div class="form-outline mb-4">-->
-<!--                    {{form.username}}-->
-<!--                  </div>-->
-<!--                  <div class="form-outline mb-4">-->
-<!--                    <label class="form-label" >Password</label>-->
-<!--                    {{form.password}}-->
-<!--                  </div>-->
-<!--                  <div class="text-center pt-1 mb-5 pb-1">-->
-<!--                    <input type="submit" value="Login">-->
-<!--                    <a class="text-muted" href="#!">Forgot password?</a>-->
-<!--                  </div>-->
-<!--                  <div class="d-flex align-items-center justify-content-center pb-4">-->
-<!--                    <p class="mb-0 me-2">Don't have an account?</p>-->
-<!--                    <button type="button" class="btn btn-outline-danger"><a href="{%url 'registration' %}">Create new</a></button>-->
-<!--                  </div>-->
-<!--                </form>-->
-
               </div>
+              <p><a class="btn btn-primary" href="{% url 'rsystem:registration'%}">Register</a></p>
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
               <div class="text-red px-3 py-4 p-md-5 mx-md-4">

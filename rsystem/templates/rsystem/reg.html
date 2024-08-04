@@ -1,15 +1,20 @@
 <!DOCTYPE html>
+{% extends 'rsystem/base.html'%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title> Registration From </title>
 </head>
+{% block content %}
 <body>
+<div class="container">
 <form method="post">
     {% csrf_token %}
     {{user_form.as_p}}
     <input type="submit" value="Create My Account">
 </form>
-
+</div>
 </body>
 </html>
+{% endblock %}
+

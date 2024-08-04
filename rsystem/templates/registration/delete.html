@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends 'rsystem/base.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete View</title>
+</head>
+{%block content%}
+<body>
+<div class="container">
+<h2>Are you Sure you want to  Delete this Reservation </h2>
+<form class="form" method="post">
+    {%csrf_token%}
+    <input class="btn btn-danger" type="submit" value="Delete">
+    {{reservation_delete.car_make}}
+</form>
+    </div>
+</body>
+</html>
+{% endblock %}

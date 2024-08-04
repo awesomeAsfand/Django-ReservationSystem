@@ -10,17 +10,22 @@
 <body>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card card-body">
-                <form method="get">
-                    {{myFilters.form}}
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="card card-body">
+                    <form method="get" class="d-flex align-items-center">
+                        <div>
+                            {{myFilters.form}}
+                            <button type="submit" class="btn btn-primary ms-2">Search</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="container">
     <table class="table table-striped">
         <thead>
@@ -28,7 +33,6 @@
             <th>Image</th>
             <th>Car Make</th>
             <th>Car Rent</th>
-            <th>Details</th>
             <th>Check Availability</th>
         </tr>
         </thead>
@@ -38,8 +42,8 @@
                 <td class="image-cell"> <img class="img-fluid" src="{% if c.car_image %} {{c.car_image.url}} {%else%} {%static 'media/media/na.jpeg'%}{%endif%}" alt="Card image cap"></td>
                 <td>{{c.make}}</td>
                 <td>{{c.car_rent}}</td>
-                <td><a class="btn btn-primary" href="{%url 'car_detail' c.slug%}">Details</a></td>
-                <td><a class="btn btn-primary" href="{%url 'check_availability' c.id %}">Check Availability</a></td>
+<!--                <td><a class="btn btn-primary" href="{%url 'rsystem:car_detail' c.id%}">Details</a></td>-->
+                <td><a class="btn btn-primary" href="{%url 'rsystem:check_availability' c.id %}">Check Availability</a></td>
             </tr>
         {% endfor %}
         </tbody>
@@ -59,3 +63,4 @@
     }
 </style>
 {% endblock %}
+

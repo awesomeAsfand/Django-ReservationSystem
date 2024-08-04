@@ -9,6 +9,9 @@ from django.contrib.auth import authenticate, login, logout
 from .filters import CarFilter
 from django.contrib import messages
 import datetime
+from cart.forms import CartAddCarForm
+from cart.views import cart_add
+
 
 def car_list(request):
     cars = Cars.objects.all()
@@ -18,25 +21,43 @@ def car_list(request):
     return render(request, 'rsystem/list.html', {'cars': cars, 'myFilters': myFilters, 'form1': form1})
 
 
-def car_detail(request, car):
-    car_detail = get_object_or_404(Cars, slug=car)
-    return render(request, 'rsystem/detail.html', {'car_detail': car_detail})
+@login_required
+def car_detail(request, pk):
+    car_detail = get_object_or_404(Cars, id=pk)
+    user_reservation_detail = Reservation.objects.filter(user=request.user)
+    return render(request, 'rsystem/detail.html',
+                  {'car_detail': car_detail, 'user_reservation_detail': user_reservation_detail})
 
 
 @login_required
 def reservation_view(request, pk):
-    car = Cars.objects.get(id=pk)
+    cars = Cars.objects.get(id=pk)
     if request.method == "POST":
         form = ReservationForm(request.POST)
         if form.is_valid():
             reservation = form.save(commit=False)
-            reservation.car_make = car
+            reservation.car_make = cars
             reservation.user = request.user
-            reservation.save()
-            return redirect('/')
+            reservation_start_date = form.cleaned_data['start_date']
+            reservation_end_date = form.cleaned_data['end_date']
+            if reservation_start_date and reservation_end_date < datetime.date.today():
+                messages.error(request, 'Date must be a future date')
+            else:
+                reservation.save()
+                return redirect('rsystem:car_detail', pk=pk)
+
     else:
         form = ReservationForm()
-    return render(request, 'rsystem/reservation.html', {'form': form, 'car': car})
+    return render(request, 'rsystem/reservation.html', {'form': form, 'cars': cars})
+
+
+def delete_reservation(request, pk):
+    reservation_delete = get_object_or_404(Reservation, id=pk)
+    if request.method == 'POST':
+        reservation_delete.delete()
+        return redirect('rsystem:car_list')
+
+    return render(request, 'registration/delete.html', {'reservation_delete': reservation_delete})
 
 
 def check_availability(request, pk):

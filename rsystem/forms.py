@@ -4,6 +4,7 @@ from .models import Reservation
 from django.contrib.auth.models import User
 import datetime
 
+
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
@@ -39,7 +40,7 @@ class UserRegistration(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'email']
+        fields = ['username', 'first_name']
 
     def clean_password2(self):
         cd = self.cleaned_data

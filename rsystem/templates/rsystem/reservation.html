@@ -6,13 +6,25 @@
     <title>Title</title>
 </head>
 {%block content %}
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+        {{message}}
+    </div>
+{%endfor%}
+{% endif %}
 <body>
-<h2>Reserve : {{car.make}}</h2>
-<form method="post">
+<div class="container" align="center">
+    <div class="container" align="center">
+        <h3>Reservation for  : {{cars.make}}</h3>
+    </div>
+
+<form action="" method="post">
     {% csrf_token %}
     {{form}}
     <input type="submit" value="Reserve">
 </form>
+    </div>
 </body>
 </html>
 {% endblock %}

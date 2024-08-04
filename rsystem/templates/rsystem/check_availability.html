@@ -6,23 +6,26 @@
     <title>Title</title>
 </head>
 {%block content %}
+<div class="container">
 {% if messages %}
     {% for message in messages %}
     <div class="alert alert-primary {{message.tag}}" role="alert">
         {{message|safe}}
         {% if message.tags == 'success' %}
-        <a href="{%url 'reservation' car.id %}">Reserve this Car</a>
+        <a href="{%url 'rsystem:reservation' car.id %}">Reserve this Car</a>
         {%endif%}
     </div>
     {%endfor%}
 {% endif %}
+    </div>
 <body>
 <form method="post">
     {% csrf_token %}
     {{car.make}}
-    {{form}}
+    {{form.as_p}}
     <input class="btn btn-primary" type="submit" value="Check">
 </form>
 </body>
 {%endblock%}
 </html>
+

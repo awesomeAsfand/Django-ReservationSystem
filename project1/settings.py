@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_filters",
+    'cart.apps.CartConfig',
 ]
+
 # settings.py
 
 # Log out the user after 30 minutes (30*60 seconds) of inactivity
@@ -49,14 +51,15 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # Optionally, refresh the session expiry time with every request
 SESSION_SAVE_EVERY_REQUEST = True
 
+CART_SESSION_ID = 'cart'
 
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-LOGIN_REDIRECT_URL = 'car_list'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'rsystem:car_list'
+LOGIN_URL = 'rsystem:login'
+LOGOUT_URL = 'rsystem:logout'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
